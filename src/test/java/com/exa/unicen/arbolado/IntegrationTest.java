@@ -1,6 +1,5 @@
 package com.exa.unicen.arbolado;
 
-import com.exa.unicen.arbolado.WsrestarboladoApp;
 import com.exa.unicen.arbolado.config.AsyncSyncConfiguration;
 import com.exa.unicen.arbolado.config.EmbeddedSQL;
 import java.lang.annotation.ElementType;

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <!--
+        Added the constraints for entity Arbol.
+    -->
+    <changeSet id="20230923204438-2" author="jhipster">
+
+        <addForeignKeyConstraint baseColumnNames="especie_id"
+                                 baseTableName="arbol"
+                                 constraintName="fk_arbol__especie_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="especie"
+                                 />
+
+        <addForeignKeyConstraint baseColumnNames="calle_id"
+                                 baseTableName="arbol"
+                                 constraintName="fk_arbol__calle_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="calle"
+                                 />
+    </changeSet>
+</databaseChangeLog>

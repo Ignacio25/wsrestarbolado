@@ -1,0 +1,44 @@
+{
+  "applications": "*",
+  "changelogDate": "20230923163833",
+  "entityTableName": "especie",
+  "fields": [
+    {
+      "fieldName": "nombreCientifico",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "nombreComun",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imagen",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estadoConservacion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "alturaMax",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "familia",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "origen",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Especie",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}

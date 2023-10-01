@@ -1,0 +1,21 @@
+{
+  "applications": "*",
+  "changelogDate": "20230923163832",
+  "entityTableName": "calle",
+  "fields": [
+    {
+      "fieldName": "nombre",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String",
+      "fieldValidateRules": ["required"]
+    }
+  ],
+  "name": "Calle",
+  "pagination": "pagination",
+  "relationships": [],
+  "searchEngine": "no"
+}

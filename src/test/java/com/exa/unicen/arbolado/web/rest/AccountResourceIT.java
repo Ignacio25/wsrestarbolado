@@ -14,7 +14,6 @@ import com.exa.unicen.arbolado.security.AuthoritiesConstants;
 import com.exa.unicen.arbolado.service.UserService;
 import com.exa.unicen.arbolado.service.dto.AdminUserDTO;
 import com.exa.unicen.arbolado.service.dto.PasswordChangeDTO;
-import com.exa.unicen.arbolado.service.dto.UserDTO;
 import com.exa.unicen.arbolado.web.rest.vm.KeyAndPasswordVM;
 import com.exa.unicen.arbolado.web.rest.vm.ManagedUserVM;
 import java.time.Instant;

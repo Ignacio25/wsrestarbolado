@@ -1,0 +1,10 @@
+entity Calle {
+	nombre String
+	descripcion String
+}
+
+entity Especie {
+	nombre String
+	descripcion String
+}
+

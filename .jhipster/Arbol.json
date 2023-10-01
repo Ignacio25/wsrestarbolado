@@ -1,0 +1,76 @@
+{
+  "applications": "*",
+  "changelogDate": "20230923204438",
+  "entityTableName": "arbol",
+  "fields": [
+    {
+      "fieldName": "altura",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "latitud",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "longitud",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "circunferencia",
+      "fieldType": "Float"
+    },
+    {
+      "fieldName": "fechaPlantacion",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "fechaUltimaPoda",
+      "fieldType": "Instant"
+    },
+    {
+      "fieldName": "descripcion",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "imagen",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "estado",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "tipoFrente",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "interferencia",
+      "fieldType": "String"
+    },
+    {
+      "fieldName": "alturaCalle",
+      "fieldType": "Integer"
+    },
+    {
+      "fieldName": "exposicionSol",
+      "fieldType": "String"
+    }
+  ],
+  "name": "Arbol",
+  "pagination": "pagination",
+  "relationships": [
+    {
+      "otherEntityName": "especie",
+      "relationshipName": "especie",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    },
+    {
+      "otherEntityName": "calle",
+      "relationshipName": "calle",
+      "relationshipSide": "left",
+      "relationshipType": "many-to-one"
+    }
+  ],
+  "searchEngine": "no"
+}

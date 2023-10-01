@@ -1,0 +1,44 @@
+entity Calle {
+	nombre String required
+	descripcion String required
+}
+
+entity Especie {
+	nombreCientifico String
+    nombreComun String required
+	descripcion String
+    imagen String
+    estadoConservacion String
+    alturaMax Float
+    familia String
+    origen String
+}
+
+entity Arbol {
+	altura Float 
+    latitud String
+    longitud String
+    circunferencia Float
+    fechaPlantacion Instant
+    fechaUltimaPoda Instant
+    descripcion String
+    imagen String
+    estado String
+    tipoFrente String
+    interferencia String
+    alturaCalle Integer
+    exposicionSol String
+}
+
+relationship ManyToOne {
+	Arbol{especie} to Especie
+}
+
+relationship ManyToOne {
+    Arbol{calle} to Calle
+}
+
+paginate Especie, Arbol, Calle with pagination
+
+
+
