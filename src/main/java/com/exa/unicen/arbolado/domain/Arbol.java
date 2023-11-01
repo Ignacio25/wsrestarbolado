@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+
 /**
  * A Arbol.
  */
@@ -66,13 +67,13 @@ public class Arbol implements Serializable {
 
     /*@Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
-    @Column(name = "created_at", nullable = false)
+    @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
-    private Date updatedAt;*/
+    private Date updatedAt; */
 
     public Arbol() {}
 

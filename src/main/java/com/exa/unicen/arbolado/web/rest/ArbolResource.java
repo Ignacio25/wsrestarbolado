@@ -216,4 +216,19 @@ public class ArbolResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
+    
+    /**
+     * Custom Method
+     * {@code GET  /arbols/:especieId} : get all arboles with specified specue.
+     *
+     * @param pageable the pagination information.
+     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of arbols in body.
+     */
+    @GetMapping("/arbols/especies/{especieId}")
+    public List<Arbol> getArbolsBySpecie(@PathVariable Long especieId) {
+
+        return arbolRepository.findAllByEspecieId(especieId);
+        /*HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
+        return ResponseEntity.ok().headers(headers).body(page.getContent());*/
+    }
 }
