@@ -42,7 +42,8 @@ public class CRLFLogConverter extends CompositeConverter<ILoggingEvent> {
         ELEMENTS = Collections.unmodifiableMap(ansiElements);
     }
 
-    @Override
+    @SuppressWarnings("deprecation")
+	@Override
     protected String transform(ILoggingEvent event, String in) {
         AnsiElement element = ELEMENTS.get(getFirstOption());
         if ((event.getMarker() != null && event.getMarker().contains(CRLF_SAFE_MARKER)) || isLoggerSafe(event)) {

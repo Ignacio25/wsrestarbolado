@@ -10,7 +10,8 @@ import tech.jhipster.config.locale.AngularCookieLocaleResolver;
 @Configuration
 public class LocaleConfiguration implements WebMvcConfigurer {
 
-    @Bean
+    @SuppressWarnings("deprecation")
+	@Bean
     public LocaleResolver localeResolver() {
         AngularCookieLocaleResolver cookieLocaleResolver = new AngularCookieLocaleResolver();
         cookieLocaleResolver.setCookieName("NG_TRANSLATE_LANG_KEY");

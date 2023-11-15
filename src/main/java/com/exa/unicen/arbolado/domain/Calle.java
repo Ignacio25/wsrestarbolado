@@ -7,12 +7,8 @@ import java.util.Date;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-/**
- * A Calle.
- */
 @Entity
 @Table(name = "calle")
-@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Calle implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -85,8 +81,6 @@ public class Calle implements Serializable {
         this.descripcion = descripcion;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -100,11 +94,9 @@ public class Calle implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "Calle{" +

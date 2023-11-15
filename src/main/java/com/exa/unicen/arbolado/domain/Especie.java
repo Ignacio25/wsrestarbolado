@@ -7,12 +7,8 @@ import java.util.Date;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
-/**
- * A Especie.
- */
 @Entity
 @Table(name = "especie")
-@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Especie implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -56,8 +52,6 @@ public class Especie implements Serializable {
     @UpdateTimestamp
     @Column(name = "updated_at", nullable = true)
     private Date updatedAt;
-
-    // jhipster-needle-entity-add-field - JHipster will add fields here
 
     public Especie id(Long id) {
         this.setId(id);

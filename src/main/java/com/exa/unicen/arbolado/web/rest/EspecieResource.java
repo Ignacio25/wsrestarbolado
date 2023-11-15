@@ -8,7 +8,7 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
 import java.net.URI;
 import java.net.URISyntaxException;
-import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -29,9 +29,6 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
-/**
- * REST controller for managing {@link com.exa.unicen.arbolado.domain.Especie}.
- */
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -53,13 +50,6 @@ public class EspecieResource {
         this.especieRepository = especieRepository;
     }
 
-    /**
-     * {@code POST  /especies} : Create a new especie.
-     *
-     * @param especie the especie to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new especie, or with status {@code 400 (Bad Request)} if the especie has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PostMapping("/especies")
     public ResponseEntity<Especie> createEspecie(@Valid @RequestBody Especie especie) throws URISyntaxException {
         log.debug("REST request to save Especie : {}", especie);
@@ -73,16 +63,6 @@ public class EspecieResource {
             .body(result);
     }
 
-    /**
-     * {@code PUT  /especies/:id} : Updates an existing especie.
-     *
-     * @param id the id of the especie to save.
-     * @param especie the especie to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated especie,
-     * or with status {@code 400 (Bad Request)} if the especie is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the especie couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PutMapping("/especies/{id}")
     public ResponseEntity<Especie> updateEspecie(
         @PathVariable(value = "id", required = false) final Long id,
@@ -107,17 +87,6 @@ public class EspecieResource {
             .body(result);
     }
 
-    /**
-     * {@code PATCH  /especies/:id} : Partial updates given fields of an existing especie, field will ignore if it is null
-     *
-     * @param id the id of the especie to save.
-     * @param especie the especie to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated especie,
-     * or with status {@code 400 (Bad Request)} if the especie is not valid,
-     * or with status {@code 404 (Not Found)} if the especie is not found,
-     * or with status {@code 500 (Internal Server Error)} if the especie couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PatchMapping(value = "/especies/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Especie> partialUpdateEspecie(
         @PathVariable(value = "id", required = false) final Long id,
@@ -173,25 +142,19 @@ public class EspecieResource {
         );
     }
 
-    /**
-     * {@code GET  /especies} : get all the especies.
-     *
-     * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of especies in body.
-     */
     @GetMapping("/especies")
-    public ResponseEntity<List<Especie>> getAllEspecies(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+    public ResponseEntity<Map<String, Object>> getAllEspecies(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
         Page<Especie> page = especieRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        Map<String, Object> data = Map.of(
+        		"content", page.getContent(), 
+        		"total", page.getTotalPages(),
+        		"page", page.getNumber()
+        );
+        return ResponseEntity.ok().headers(headers).body(data);
     }
 
-    /**
-     * {@code GET  /especies/:id} : get the "id" especie.
-     *
-     * @param id the id of the especie to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the especie, or with status {@code 404 (Not Found)}.
-     */
+
     @GetMapping("/especies/{id}")
     public ResponseEntity<Especie> getEspecie(@PathVariable Long id) {
         log.debug("REST request to get Especie : {}", id);
@@ -199,12 +162,6 @@ public class EspecieResource {
         return ResponseUtil.wrapOrNotFound(especie);
     }
 
-    /**
-     * {@code DELETE  /especies/:id} : delete the "id" especie.
-     *
-     * @param id the id of the especie to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
     @DeleteMapping("/especies/{id}")
     public ResponseEntity<Void> deleteEspecie(@PathVariable Long id) {
         log.debug("REST request to delete Especie : {}", id);

@@ -4,13 +4,12 @@ import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.UpdateTimestamp;
 
-/**
- * A Arbol.
- */
+
 @Entity
 @Table(name = "arbol")
-@SuppressWarnings("common-java:DuplicatedBlocks")
 public class Arbol implements Serializable {
 
     private static final long serialVersionUID = 1L;
@@ -65,15 +64,15 @@ public class Arbol implements Serializable {
     @ManyToOne
     private Calle calle;
 
-    /*@Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.TIMESTAMP)
     @CreationTimestamp
     @Column(name = "created_at", nullable = false, updatable = false)
     private Date createdAt;
 
     @Temporal(TemporalType.TIMESTAMP)
     @UpdateTimestamp
-    @Column(name = "updated_at", nullable = true)
-    private Date updatedAt; */
+    @Column(name = "updated_at", nullable = false, updatable = true)
+    private Date updatedAt;
 
     public Arbol() {}
 
@@ -321,8 +320,6 @@ public class Arbol implements Serializable {
         return this;
     }
 
-    // jhipster-needle-entity-add-getters-setters - JHipster will add getters and setters here
-
     @Override
     public boolean equals(Object o) {
         if (this == o) {
@@ -336,11 +333,9 @@ public class Arbol implements Serializable {
 
     @Override
     public int hashCode() {
-        // see https://vladmihalcea.com/how-to-implement-equals-and-hashcode-using-the-jpa-entity-identifier/
         return getClass().hashCode();
     }
 
-    // prettier-ignore
     @Override
     public String toString() {
         return "Arbol{" +

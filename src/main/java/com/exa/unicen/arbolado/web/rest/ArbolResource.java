@@ -6,6 +6,7 @@ import com.exa.unicen.arbolado.web.rest.errors.BadRequestAlertException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 import java.util.Optional;
 import org.slf4j.Logger;
@@ -22,9 +23,6 @@ import tech.jhipster.web.util.HeaderUtil;
 import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
-/**
- * REST controller for managing {@link com.exa.unicen.arbolado.domain.Arbol}.
- */
 @RestController
 @RequestMapping("/api")
 @Transactional
@@ -43,13 +41,6 @@ public class ArbolResource {
         this.arbolRepository = arbolRepository;
     }
 
-    /**
-     * {@code POST  /arbols} : Create a new arbol.
-     *
-     * @param arbol the arbol to create.
-     * @return the {@link ResponseEntity} with status {@code 201 (Created)} and with body the new arbol, or with status {@code 400 (Bad Request)} if the arbol has already an ID.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PostMapping("/arbols")
     public ResponseEntity<Arbol> createArbol(@RequestBody Arbol arbol) throws URISyntaxException {
         log.debug("REST request to save Arbol : {}", arbol);
@@ -63,16 +54,6 @@ public class ArbolResource {
             .body(result);
     }
 
-    /**
-     * {@code PUT  /arbols/:id} : Updates an existing arbol.
-     *
-     * @param id the id of the arbol to save.
-     * @param arbol the arbol to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated arbol,
-     * or with status {@code 400 (Bad Request)} if the arbol is not valid,
-     * or with status {@code 500 (Internal Server Error)} if the arbol couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PutMapping("/arbols/{id}")
     public ResponseEntity<Arbol> updateArbol(@PathVariable(value = "id", required = false) final Long id, @RequestBody Arbol arbol)
         throws URISyntaxException {
@@ -95,17 +76,6 @@ public class ArbolResource {
             .body(result);
     }
 
-    /**
-     * {@code PATCH  /arbols/:id} : Partial updates given fields of an existing arbol, field will ignore if it is null
-     *
-     * @param id the id of the arbol to save.
-     * @param arbol the arbol to update.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the updated arbol,
-     * or with status {@code 400 (Bad Request)} if the arbol is not valid,
-     * or with status {@code 404 (Not Found)} if the arbol is not found,
-     * or with status {@code 500 (Internal Server Error)} if the arbol couldn't be updated.
-     * @throws URISyntaxException if the Location URI syntax is incorrect.
-     */
     @PatchMapping(value = "/arbols/{id}", consumes = { "application/json", "application/merge-patch+json" })
     public ResponseEntity<Arbol> partialUpdateArbol(@PathVariable(value = "id", required = false) final Long id, @RequestBody Arbol arbol)
         throws URISyntaxException {
@@ -174,26 +144,19 @@ public class ArbolResource {
         );
     }
 
-    /**
-     * {@code GET  /arbols} : get all the arbols.
-     *
-     * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of arbols in body.
-     */
     @GetMapping("/arbols")
-    public ResponseEntity<List<Arbol>> getAllArbols(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
-        log.debug("REST request to get a page of Arbols");
-        Page<Arbol> page = arbolRepository.findAll(pageable);
+    public ResponseEntity<Map<String, Object>> getAllArbols(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
+
+        Page<Arbol> page = arbolRepository.findAllByOrderByUpdatedAtDesc(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());
+        Map<String, Object> data = Map.of(
+        		"content", page.getContent(), 
+        		"total", page.getTotalPages(),
+        		"page", page.getNumber()
+        );
+        return ResponseEntity.ok().headers(headers).body(data);
     }
 
-    /**
-     * {@code GET  /arbols/:id} : get the "id" arbol.
-     *
-     * @param id the id of the arbol to retrieve.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and with body the arbol, or with status {@code 404 (Not Found)}.
-     */
     @GetMapping("/arbols/{id}")
     public ResponseEntity<Arbol> getArbol(@PathVariable Long id) {
         log.debug("REST request to get Arbol : {}", id);
@@ -201,12 +164,6 @@ public class ArbolResource {
         return ResponseUtil.wrapOrNotFound(arbol);
     }
 
-    /**
-     * {@code DELETE  /arbols/:id} : delete the "id" arbol.
-     *
-     * @param id the id of the arbol to delete.
-     * @return the {@link ResponseEntity} with status {@code 204 (NO_CONTENT)}.
-     */
     @DeleteMapping("/arbols/{id}")
     public ResponseEntity<Void> deleteArbol(@PathVariable Long id) {
         log.debug("REST request to delete Arbol : {}", id);
@@ -217,18 +174,21 @@ public class ArbolResource {
             .build();
     }
     
-    /**
-     * Custom Method
-     * {@code GET  /arbols/:especieId} : get all arboles with specified specue.
-     *
-     * @param pageable the pagination information.
-     * @return the {@link ResponseEntity} with status {@code 200 (OK)} and the list of arbols in body.
-     */
     @GetMapping("/arbols/especies/{especieId}")
     public List<Arbol> getArbolsBySpecie(@PathVariable Long especieId) {
 
         return arbolRepository.findAllByEspecieId(especieId);
-        /*HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        return ResponseEntity.ok().headers(headers).body(page.getContent());*/
+    }
+    
+    @GetMapping("/arbols/last")
+    public Arbol getLastInsertedArbol() {
+
+        return arbolRepository.findOneByLastUpdatedAt();
+    }
+    
+    @GetMapping("/arbols/all")
+    public List<Arbol> getAllArboles() {
+
+        return arbolRepository.findAll();
     }
 }
