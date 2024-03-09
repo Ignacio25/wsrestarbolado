@@ -15,12 +15,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.core.io.InputStreamResource;
-import org.springframework.core.io.Resource;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
@@ -146,14 +143,9 @@ public class EspecieResource {
     public ResponseEntity<Map<String, Object>> getAllEspecies(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
         Page<Especie> page = especieRepository.findAll(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        Map<String, Object> data = Map.of(
-        		"content", page.getContent(), 
-        		"total", page.getTotalPages(),
-        		"page", page.getNumber()
-        );
+        Map<String, Object> data = Map.of("content", page.getContent(), "total", page.getTotalPages(), "page", page.getNumber());
         return ResponseEntity.ok().headers(headers).body(data);
     }
-
 
     @GetMapping("/especies/{id}")
     public ResponseEntity<Especie> getEspecie(@PathVariable Long id) {
@@ -173,14 +165,7 @@ public class EspecieResource {
     }
 
     @GetMapping("/download")
-    public ResponseEntity<Resource> getFile() {
-        String filename = "arboles.csv";
-        InputStreamResource file = new InputStreamResource(fileService.load());
-
-        return ResponseEntity
-            .ok()
-            .header(HttpHeaders.CONTENT_DISPOSITION, "attachment; filename=" + filename)
-            .contentType(MediaType.parseMediaType("application/csv"))
-            .body(file);
+    public String getFile() {
+        return "test";
     }
 }
