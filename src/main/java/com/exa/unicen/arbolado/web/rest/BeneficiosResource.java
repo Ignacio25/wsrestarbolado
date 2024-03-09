@@ -24,8 +24,8 @@ public class BeneficiosResource {
     }
 
     @PostMapping("/stormwater")
-    public Boolean calculateStormwater(@RequestBody Object request) throws JsonProcessingException {
-        return true;
+    public String calculateStormwater(@RequestBody Object request) throws JsonProcessingException {
+        return "test";
         // RestTemplate restTemplate = new RestTemplate();
         // final String uri = "http://127.0.0.1:8080/stormwater";
         // long id = 8;
