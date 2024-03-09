@@ -146,14 +146,9 @@ public class ArbolResource {
 
     @GetMapping("/arbols")
     public ResponseEntity<Map<String, Object>> getAllArbols(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
-
         Page<Arbol> page = arbolRepository.findAllByOrderByUpdatedAtDesc(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        Map<String, Object> data = Map.of(
-        		"content", page.getContent(), 
-        		"total", page.getTotalPages(),
-        		"page", page.getNumber()
-        );
+        Map<String, Object> data = Map.of("content", page.getContent(), "total", page.getTotalPages(), "page", page.getNumber());
         return ResponseEntity.ok().headers(headers).body(data);
     }
 
@@ -173,22 +168,19 @@ public class ArbolResource {
             .headers(HeaderUtil.createEntityDeletionAlert(applicationName, false, ENTITY_NAME, id.toString()))
             .build();
     }
-    
+
     @GetMapping("/arbols/especies/{especieId}")
     public List<Arbol> getArbolsBySpecie(@PathVariable Long especieId) {
-
         return arbolRepository.findAllByEspecieId(especieId);
     }
-    
+
     @GetMapping("/arbols/last")
     public Arbol getLastInsertedArbol() {
-
         return arbolRepository.findOneByLastUpdatedAt();
     }
-    
+
     @GetMapping("/arbols/all")
     public List<Arbol> getAllArboles() {
-
         return arbolRepository.findAll();
     }
 }
