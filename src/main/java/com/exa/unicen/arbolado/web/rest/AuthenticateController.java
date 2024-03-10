@@ -31,6 +31,7 @@ import org.springframework.web.bind.annotation.*;
  * Controller to authenticate users.
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class AuthenticateController {
 

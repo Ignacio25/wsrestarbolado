@@ -176,7 +176,7 @@ jhipster:
     name: 'wsrestarboladoApp'
   # By default CORS is disabled. Uncomment to enable.
   cors:
-    allowed-origins: 'https://localhost,http://localhost,https://localhost/,http://localhost/,capacitor://localhost,ionic://localhost,http://localhost:8100,https://localhost:8100,http://localhost:9000,https://localhost:9000,https://localhost:4200,https://localhost:4200,http://localhost:4200,http://192.246.103.3,https://192.246.103.3'
+    allowed-origins: ''
     # Enable CORS when running in GitHub Codespaces
     allowed-methods: '*'
     allowed-headers: '*'

@@ -22,14 +22,15 @@ import org.springframework.web.bind.annotation.*;
  * REST controller for managing the current user's account.
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class AccountResource {
 
     private static class AccountResourceException extends RuntimeException {
 
-		private static final long serialVersionUID = 1L;
+        private static final long serialVersionUID = 1L;
 
-		private AccountResourceException(String message) {
+        private AccountResourceException(String message) {
             super(message);
         }
     }

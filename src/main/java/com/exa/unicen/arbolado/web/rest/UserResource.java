@@ -15,7 +15,6 @@ import jakarta.validation.constraints.Pattern;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -33,6 +32,7 @@ import tech.jhipster.web.util.PaginationUtil;
 import tech.jhipster.web.util.ResponseUtil;
 
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api/admin")
 public class UserResource {
 
@@ -115,20 +115,15 @@ public class UserResource {
     @GetMapping("/users")
     @PreAuthorize("hasAuthority(\"" + AuthoritiesConstants.ADMIN + "\")")
     public ResponseEntity<Map<String, Object>> getAllUsers(@org.springdoc.core.annotations.ParameterObject Pageable pageable) {
-
         if (!onlyContainsAllowedProperties(pageable)) {
             return ResponseEntity.badRequest().build();
         }
 
         final Page<AdminUserDTO> page = userService.getAllManagedUsers(pageable);
         HttpHeaders headers = PaginationUtil.generatePaginationHttpHeaders(ServletUriComponentsBuilder.fromCurrentRequest(), page);
-        
-        Map<String, Object> data = Map.of(
-        		"content", page.getContent(), 
-        		"total", page.getTotalPages(),
-        		"page", page.getNumber()
-        );
-        
+
+        Map<String, Object> data = Map.of("content", page.getContent(), "total", page.getTotalPages(), "page", page.getNumber());
+
         return new ResponseEntity<>(data, headers, HttpStatus.OK);
     }
 

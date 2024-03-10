@@ -3,6 +3,7 @@ package com.exa.unicen.arbolado.web.rest;
 import com.exa.unicen.arbolado.repository.ArbolRepository;
 import com.exa.unicen.arbolado.repository.EspecieRepository;
 import com.fasterxml.jackson.core.JsonProcessingException;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
  * BeneficiosResource controller
  */
 @RestController
+@CrossOrigin(origins = "*")
 @RequestMapping("/api")
 public class BeneficiosResource {
 
