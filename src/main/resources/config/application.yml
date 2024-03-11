@@ -176,13 +176,13 @@ jhipster:
     name: 'wsrestarboladoApp'
   # By default CORS is disabled. Uncomment to enable.
   cors:
-    allowed-origins: ''
+    allowed-origins: 'capacitor://localhost,ionic://localhost,http://localhost,http://localhost:8080,http://localhost:8100'
     # Enable CORS when running in GitHub Codespaces
-    allowed-methods: '*'
+    allowed-methods: 'GET,PUT,POST,DELETE,OPTIONS'
     allowed-headers: '*'
     exposed-headers: 'Authorization,Link,X-Total-Count,X-${jhipster.clientApp.name}-alert,X-${jhipster.clientApp.name}-error,X-${jhipster.clientApp.name}-params'
     allow-credentials: true
-    max-age: 1800
+    max-age: 1728000
   mail:
     from: wsrestarbolado@localhost
   api-docs:

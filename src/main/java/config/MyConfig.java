@@ -12,7 +12,7 @@ public class MyConfig implements WebMvcConfigurer {
         registry
             .addMapping("/**")
             .allowedOrigins("*") // Allows all origins (not recommended for production)
-            .allowedMethods("GET", "POST", "PUT", "DELETE", "HEAD")
+            .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
             .allowedHeaders("Authorization", "Content-Type");
     }
 }
