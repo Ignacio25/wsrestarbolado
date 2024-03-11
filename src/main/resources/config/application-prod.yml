@@ -94,7 +94,7 @@ jhipster:
     # Allow Ionic for JHipster by default (* no longer allowed in Spring Boot 2.4+)
     allowed-origins: 'capacitor://localhost,ionic://localhost,http://localhost,http://localhost:8080,http://localhost:8100,https://localhost,http://192.168.0.102,https://192.168.0.102,http://190.246.103.3,https://190.246.103.3'
     # Enable CORS when running in GitHub Codespaces
-    allowed-methods: 'GET, PUT, POST, DELETE, OPTIONS'
+    allowed-methods: 'GET,PUT,POST,DELETE,OPTIONS'
     allowed-headers: '*'
     exposed-headers: ''
     allow-credentials: true
